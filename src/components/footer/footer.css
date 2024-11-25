@@ -1,0 +1,64 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #a6adb1;
+    color: #272525;
+  }
+  
+  .footer-section {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .footer-section img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .footer-section a {
+    display: inline-block;
+    color: #2c2727;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  .footer-section.social-icons {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+  
+  }
+  
+  .footer-section.contact-info {
+    margin-top: 20px;
+    text-align: left; 
+    align-items: center;
+  }
+  
+  
+  .footer-section form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-section input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .footer-section button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .footer-section button:hover {
+    background-color: #777;
+  }
+  

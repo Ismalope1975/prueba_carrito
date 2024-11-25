@@ -1,0 +1,65 @@
+.sucursales-container {
+  background-image: url('/assets/fondo1.jpg');
+  padding: 20px;
+  text-align: center;
+  background-size: cover;
+  width: 100%; 
+  box-sizing: border-box; 
+}
+
+.titulo_blanco {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: space-between;  
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%; 
+  box-sizing: border-box; 
+}
+
+.card_sucursal {
+  background-color: rgba(245, 245, 245, 0.75);
+  border-radius: 10px;
+  padding: 20px;
+  width: calc(33.33% - 20px); 
+  box-sizing: border-box; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px); 
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+
+@media (max-width: 1024px) {
+  .card {
+    width: calc(50% - 20px); 
+  }
+}
+
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%; 
+  }
+}
