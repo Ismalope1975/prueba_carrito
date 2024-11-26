@@ -10,7 +10,7 @@ import ItemListContainer from './components/home/Home.jsx';
 import Footer from './components/footer/Footer'; 
 import DetalleProducto from './components/productos/DetalleProducto.jsx';
 import { CartProvider } from './components/cartwidget/CartContext.jsx'; 
-import DetalleProductoCarrito from './components/productos/DetalleProducto.jsx';
+import DetalleProductoCarrito from './components/DetalleProductoCarrito.jsx';
 
 function App() {
   return (
