@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaShoppingCart } from "react-icons/fa";
 import { useCart } from './CartContext'; // Importar el hook useCart
 import CartModal from './CartModal'; // Importar el modal
+import './CartWidget.css';
 
 function CartWidget() {
   const { cart } = useCart(); // Obtener el carrito desde el contexto
@@ -20,22 +21,10 @@ function CartWidget() {
       
       {/* Badge que muestra la cantidad total de productos en el carrito */}
       {totalItems > 0 && (
-        <span 
-          className="badge" 
-          style={{
-            position: 'absolute', 
-            top: 0, 
-            right: 0, 
-            backgroundColor: 'red', 
-            color: 'white', 
-            borderRadius: '50%', 
-            padding: '5px 10px',
-            fontSize: '14px'
-          }}
-        >
-          {totalItems}
-        </span>
-      )}
+       <span className="badge">
+       {totalItems}
+      </span>
+)}
 
       {/* Mostrar el modal si showModal es true */}
       <CartModal show={showModal} handleClose={handleClose} />
