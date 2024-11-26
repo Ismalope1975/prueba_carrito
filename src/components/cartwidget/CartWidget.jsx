@@ -12,7 +12,8 @@ function CartWidget() {
   const handleClose = () => setShowModal(false);
 
   // Calcular el total de productos en el carrito (sumando las cantidades)
-  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  const totalItems =new Set(cart.map(item => item.id)).size;
 
   return (
     <div className="carrito" style={{ position: 'relative', cursor: 'pointer' }}>

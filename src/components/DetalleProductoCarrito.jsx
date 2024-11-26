@@ -3,6 +3,7 @@ import productos from "./arrayproductos";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useCart } from './cartwidget/CartContext';
+import './DetalleProductoCarrito.css'; 
 
 function DetalleProductoCarrito() {
     const { id } = useParams();
@@ -36,27 +37,26 @@ function DetalleProductoCarrito() {
 
     // Función para agregar al carrito
     const handleAddToCart = () => {
-        addItem(producto, quantity); // Aquí pasas el producto y la cantidad
+        addItem(producto, quantity); // pasamos el producto y la cantidad
     };
 
     return (
         <Container>
-            <Row className="mt-4">
+            <Row className="mt-1">
                 {/* Columna de la izquierda: Imagen grande */}
                 <Col xs={12} md={6} className="d-flex justify-content-center align-items-center">
                     <img 
                         src={producto.imagen} 
                         alt={producto.nombre}
-                        className="img-fluid"
-                        style={{ maxWidth: '100%', maxHeight: '500px', objectFit: 'cover' }} // Ajusta la imagen
+                        className="img-fluid product-image"  
                     />
                 </Col>
                 
                 {/* Columna de la derecha: Detalles del producto */}
-                <Col xs={12} md={6} className="d-flex flex-column justify-content-center p-4 text-dark">
+                <Col xs={12} md={6} className="product-details"> 
                     <h2>{producto.nombre}</h2>
                     <p>{producto.descripcion}</p>
-                    <p className="text-success fs-4">Precio: {producto.precio} US$</p>
+                    <p className="product-price">Precio: {producto.precio} US$</p>
 
                     {/* Control de cantidad minimo 1 maximo 10*/}
                     <div className="mb-3">
@@ -69,9 +69,9 @@ function DetalleProductoCarrito() {
                             onChange={handleQuantityChange}
                             max="10"
                             className="form-control"
-                            style={{ width: '60px' }} // Ajuste del input mas chico
+                            style={{ width: '60px' }} // Ajuste del input mas chico agregado aqui porque no funcionaba desde css
                         />
-                        {error && <small className="text-danger">{error}</small>}
+                        {error && <small className="error-message">{error}</small>} 
                     </div>
 
                     {/* Botón para agregar al carrito */}
@@ -79,7 +79,7 @@ function DetalleProductoCarrito() {
                         onClick={handleAddToCart}
                         disabled={isInCart(producto.id)} // Deshabilitar si ya está en el carrito
                         variant="primary"
-                        className="w-100"
+                        className="add-to-cart-button"  
                     >
                         {isInCart(producto.id) ? 'Ya está en el carrito' : 'Agregar al carrito'}
                     </Button>
@@ -90,4 +90,3 @@ function DetalleProductoCarrito() {
 }
 
 export default DetalleProductoCarrito;
-

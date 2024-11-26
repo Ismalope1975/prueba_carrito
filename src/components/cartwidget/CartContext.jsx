@@ -1,6 +1,6 @@
 // CartContext.js
 
-import React, { createContext, useContext, useState,useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 // contexto del carrito
 const CartContext = createContext();
@@ -9,7 +9,6 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);  // array de productos
 
-      
     // Función para agregar un producto al carrito
     const addItem = (producto, quantity) => {
         const productInCart = cart.find(item => item.id === producto.id);
@@ -24,7 +23,6 @@ export const CartProvider = ({ children }) => {
         } else {
             // Si el producto no está en el carrito, lo agregamos
             setCart([...cart, { ...producto, quantity }]);
-                           
         }
     };
 
@@ -43,8 +41,17 @@ export const CartProvider = ({ children }) => {
         return cart.some(item => item.id === id);
     };
 
+    // Nueva función para actualizar la cantidad de un producto
+    const updateItemQuantity = (id, newQuantity) => {
+        setCart(cart.map(item =>
+            item.id === id
+                ? { ...item, quantity: newQuantity }
+                : item
+        ));
+    };
+
     return (
-        <CartContext.Provider value={{ cart, addItem, isInCart, removeItem, clear }}>
+        <CartContext.Provider value={{ cart, addItem, isInCart, removeItem, clear, updateItemQuantity }}>
             {children}
         </CartContext.Provider>
     );

@@ -6,9 +6,9 @@ import NoPage from './components/nopage/NoPage.jsx';
 import Nosotros from './components/nosotros/Nosotros.jsx';
 import Contacto from './components/Contacto.jsx';
 import Productos from './components/productos/productos.jsx';
-import ItemListContainer from './components/home/Home.jsx';
+import ItemListContainer from './components/home/home.jsx';
 import Footer from './components/footer/Footer'; 
-import DetalleProducto from './components/productos/DetalleProducto.jsx';
+
 import { CartProvider } from './components/cartwidget/CartContext.jsx'; 
 import DetalleProductoCarrito from './components/DetalleProductoCarrito.jsx';
 
