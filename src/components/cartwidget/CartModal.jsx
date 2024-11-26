@@ -14,7 +14,7 @@ function CartModal({ show, handleClose }) {
   // Función para confirmar la acción de limpiar el carrito
   const handleClearCart = () => {
     if (window.confirm("¿Estás seguro de que deseas limpiar todo el carrito?")) {
-      clear();  // Llamamos a la función clear del contexto
+      clear();  // Llamamos a la función clear 
     }
   };
 
@@ -45,8 +45,7 @@ function CartModal({ show, handleClose }) {
                     size="sm" 
                     onClick={() => removeItem(item.id)} 
                     className="ml-3"
-                  >
-                    Eliminar
+                  >Eliminar
                   </Button>
                 </div>
               </ListGroup.Item>

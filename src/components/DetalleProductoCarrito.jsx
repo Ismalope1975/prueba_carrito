@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { useCart } from './cartwidget/CartContext';
 
-function DetalleProducto() {
+function DetalleProductoCarrito() {
     const { id } = useParams();
     const { addItem, isInCart } = useCart();  // Obtener funciones del carrito
 
@@ -18,7 +18,7 @@ function DetalleProducto() {
 
     const [quantity, setQuantity] = useState(1); // Estado para manejar la cantidad
 
-    // Validar la cantidad (ej. no permitir valores negativos o inferiores a 1)
+    // Validar la cantidad no negativos o inferiores a 1)
     const handleQuantityChange = (e) => {
         const value = Number(e.target.value);
         if (value >= 1) { // Validar que la cantidad sea mayor o igual a 1
@@ -29,9 +29,6 @@ function DetalleProducto() {
     // Función para agregar al carrito
     const handleAddToCart = () => {
         addItem(producto, quantity); // Aquí pasas el producto y la cantidad
-        console.log('Producto agregado al carrito:', producto);
-        console.log('Cantidad seleccionada:', quantity);
-        console.log('Estado del carrito:', cart);  // Verificar el estado del carrito
     };
 
     return (
@@ -45,14 +42,14 @@ function DetalleProducto() {
                             <Card.Text>{producto.descripcion}</Card.Text>
                             <Card.Text>{producto.precio}</Card.Text>
 
-                            {/* Control para la cantidad */}
+                            {/* Control cantidad */}
                             <div>
                                 <input
                                     type="number"
                                     value={quantity}
-                                    min="1" // Asegurarse que no sea menor a 1
+                                    min="1" // que no sea menor a 1
                                     onChange={handleQuantityChange}
-                                    max="10" // Ejemplo de límite máximo
+                                    max="10" 
                                 />
                             </div>
 
@@ -71,4 +68,4 @@ function DetalleProducto() {
     );
 }
 
-export default DetalleProducto;
+export default DetalleProductoCarrito;

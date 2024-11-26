@@ -10,6 +10,7 @@ import ItemListContainer from './components/home/Home.jsx';
 import Footer from './components/footer/Footer'; 
 import DetalleProducto from './components/productos/DetalleProducto.jsx';
 import { CartProvider } from './components/cartwidget/CartContext.jsx'; 
+import DetalleProductoCarrito from './components/productos/DetalleProducto.jsx';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <Route path="/sucursales" element={<Sucursales />} /> 
           <Route path="/contacto" element={<Contacto />} /> 
           <Route path="/nosotros" element={<Nosotros />} /> 
-          <Route path="/item/:id" element={<DetalleProducto />} />        
+          <Route path="/item/:id" element={<DetalleProductoCarrito />} />        
          
           <Route path="*" element={<NoPage />} />
         </Routes>
