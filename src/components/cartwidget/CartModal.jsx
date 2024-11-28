@@ -1,8 +1,8 @@
 import React from 'react';
-import { Modal, Button, ListGroup, Row, Col } from 'react-bootstrap';
+import { Modal, Button, ListGroup, Row, Col, Image } from 'react-bootstrap';
 import { useCart } from './CartContext';
 
-function CartModal({ show, handleClose, currency = 'USD' }) {
+function CartModal({ show, handleClose, currency = 'USD', orderNumber = '12345' }) {
   const { cart, removeItem, clear } = useCart();
 
   // Formato para mostrar precios correctamente
@@ -29,15 +29,26 @@ function CartModal({ show, handleClose, currency = 'USD' }) {
       size="lg"  // tamaño grande para el modal
     >
       <Modal.Header closeButton>
-        <Modal.Title>Carrito de Compras</Modal.Title>
+        <Modal.Title className="w-100">
+          <Row className="w-100">
+            <Col xs={6} className="text-start">
+              <Image src="../public/img/designer.png" alt="Logo" fluid style={{ maxHeight: '130px' }} />
+            </Col>
+            <Col xs={6} className="text-end">
+              <h4>Audiomaster</h4>
+              <h6>1234 Calle Falsa, Ciudad, País</h6>
+              <div>Número de Orden: {orderNumber}</div>
+            </Col>
+          </Row>
+        </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body style={{ border: '1px solid #dee2e6', padding: '20px' }}>
         {cart.length === 0 ? (
           <p>No hay productos en el carrito.</p>
         ) : (
           <>
             {/* Encabezados para la tabla */}
-            <Row className="fw-bold mb-3">
+            <Row className="fw-bold mb-3 border-bottom pb-2">
               <Col xs={4} md={4} lg={4}>Nombre</Col> {/* Columna "Nombre" ajustada */}
               <Col xs={2} className="text-center">Precio U.</Col>
               <Col xs={2} className="text-center">Cantidad</Col>
@@ -47,7 +58,7 @@ function CartModal({ show, handleClose, currency = 'USD' }) {
 
             {/* Productos en el carrito */}
             {cart.map((item) => (
-              <ListGroup.Item key={item.id} className="d-flex justify-content-between align-items-center">
+              <ListGroup.Item key={item.id} className="d-flex justify-content-between align-items-center border-bottom">
                 <Row className="w-100">
                   <Col xs={4} md={4} lg={4} className="text-start" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {item.nombre}
@@ -75,14 +86,17 @@ function CartModal({ show, handleClose, currency = 'USD' }) {
         )}
       </Modal.Body>
       <Modal.Footer>
+        <Button variant="danger" onClick={handleClearCart} className="me-2">
+          Limpiar carrito
+        </Button>
+        <Button variant="secondary" onClick={handleClose} className="me-auto">
+          Cerrar
+        </Button>
         <div style={{ flex: 1, textAlign: 'right' }}>
           <span><strong>Total: {formatoPrecio.format(totalCarrito)}</strong></span>
         </div>
-        <Button variant="secondary" onClick={handleClose}>
-          Cerrar
-        </Button>
-        <Button variant="danger" onClick={handleClearCart}>
-          Limpiar carrito
+        <Button variant="primary" onClick={() => alert('Compra finalizada')} className="ms-2">
+          Finalizar la compra
         </Button>
       </Modal.Footer>
     </Modal>

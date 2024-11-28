@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import Logo from "../Logo/Logo";
-import CartWidget from "../cartwidget/CartWidget"; // Asegúrate de importar CartWidget
+import CartWidget from "../cartwidget/CartWidget"; 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -47,7 +47,7 @@ function NavScrollExample() {
             <Button variant="outline-success">Buscar</Button>
           </Form>
 
-          {/* El CartWidget se moverá un poco hacia la izquierda */}
+          
           <CartWidget />
         </Navbar.Collapse>
       </Container>

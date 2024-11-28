@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Row, Col, Spinner } from 'react-bootstrap'; 
-import productos from "../arrayproductos";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from '/src/firebase/config.js'; 
 import Producto from "./producto"; 
 
 const Productos = () => {
@@ -9,28 +10,42 @@ const Productos = () => {
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Hook para redireccionar
+  const navigate = useNavigate(); // Hook 
 
   useEffect(() => {
-    setLoading(true);
-    setError(null); // Resetear error cuando se cambia la categoría
+    const fetchProductos = async () => {
+      setLoading(true);
+      setError(null); // Resetear error 
 
-    const productosFiltrados = productos.filter(
-      (producto) => producto.categoria === categoria
-    );
+      try {
+        const productosRef = collection(db, "productos");
+        const q = query(productosRef, where("categoria", "==", categoria));
+        const querySnapshot = await getDocs(q);
+        const productosFiltrados = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-    if (productosFiltrados.length === 0) {
-      // Si no hay productos para esa categoría, redirigir a NoPage
-      navigate('/nopage', { replace: true });
-    } else {
-      setProductosFiltrados(productosFiltrados);
-    }
+        if (productosFiltrados.length === 0) {
+          // Si no hay productos para esa categoría,  NoPage
+          navigate('/nopage', { replace: true });
+        } else {
+          setProductosFiltrados(productosFiltrados);
+        }
+      } catch (error) {
+        setError("Error al cargar los productos");
+        console.error("Error al obtener los productos: ", error);
+      }
 
-    setLoading(false);
+      setLoading(false);
+    };
+
+    fetchProductos();
   }, [categoria, navigate]);
 
   if (loading) {
     return <Spinner animation="border" variant="primary" />;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
   }
 
   return (
@@ -58,4 +73,3 @@ const Productos = () => {
 };
 
 export default Productos;
-

@@ -1,5 +1,3 @@
-// CartContext.js
-
 import React, { createContext, useContext, useState } from 'react';
 
 // contexto del carrito
