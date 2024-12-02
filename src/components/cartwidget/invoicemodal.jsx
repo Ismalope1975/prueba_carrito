@@ -11,7 +11,7 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
     cvc: '',
   });
 
-  // UseEffect para vaciar los campos cuando se abre el modal
+  // vacio los campos cuando se abre 
   useEffect(() => {
     if (show) {
       setCustomerData({
@@ -29,7 +29,7 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
     }
   }, [show, setCustomerData]);
 
-  // Actualizar los datos de la tarjeta
+  // datos de la tarjeta
   const handleCardChange = (e) => {
     const { name, value } = e.target;
     setCardData((prev) => ({
@@ -41,7 +41,7 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
   const handleConfirmCustomerData = () => {
     if (customerData.name && customerData.document && customerData.address && customerData.phone) {
       handleConfirmData();
-      handleConfirmPayment(); // Confirmar el pago directamente
+      handleConfirmPayment(); 
     } else {
       alert('Por favor, completa todos los campos.');
     }
@@ -49,13 +49,13 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
 
   const handlePayment = () => {
     if (cardData.number && cardData.expiry && cardData.cvc) {
-      // Simulación de proceso de pago
+     
       Swal.fire({
         icon: 'success',
         title: '¡Pago confirmado!',
         text: 'Su pedido ha sido procesado con éxito.',
       });
-      handleClose();  // Cerrar el modal de la factura
+      handleClose(); 
     } else {
       alert('Por favor, completa los datos de la tarjeta.');
     }
@@ -63,14 +63,14 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
 
   return (
     <>
-      {/* Modal para ingresar datos del cliente */}
+      {/* Modal para cargar datos del cliente */}
       <Modal show={show} onHide={handleClose} centered size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Datos de facturación</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row>
-            {/* Columna izquierda: Datos del cliente */}
+            {/* a la izquierda: Datos del cliente */}
             <Col md={6}>
               <Form>
                 <Form.Group controlId="name">
@@ -122,10 +122,10 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
               </Form>
             </Col>
 
-            {/* Columna derecha: Pasarela de pago */}
+            {/* a la derecha Pasarela de pago */}
             <Col md={6}>
               <Form>
-                {/* Renderizar la tarjeta visual con react-credit-cards-2 */}
+                
                 <Cards
                   cvc={cardData.cvc}
                   expiry={cardData.expiry}

@@ -7,7 +7,7 @@ import { db } from '/src/firebase/config.js';
 import './DetalleProductoCarrito.css'; 
 import { useNavigate } from 'react-router-dom';  
 import { FaArrowLeft } from 'react-icons/fa'; 
-import Swal from 'sweetalert2';  // Importar SweetAlert2
+import Swal from 'sweetalert2';  
 
 function DetalleProductoCarrito() {
     const { id } = useParams();
@@ -17,8 +17,8 @@ function DetalleProductoCarrito() {
     const [producto, setProducto] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [quantity, setQuantity] = useState(1); // Estado para manejar la cantidad
-    const [stockRestante, setStockRestante] = useState(0); // Estado para el stock restante
+    const [quantity, setQuantity] = useState(1); 
+    const [stockRestante, setStockRestante] = useState(0); 
 
     useEffect(() => {
         const fetchProducto = async () => {
@@ -32,9 +32,9 @@ function DetalleProductoCarrito() {
                 if (docSnap.exists()) {
                     const productoData = docSnap.data();
                     setProducto({ id: docSnap.id, ...productoData });
-                    setStockRestante(productoData.stock);  // Establecer el stock inicial
+                    setStockRestante(productoData.stock);  
                 } else {
-                    // Mostrar error si el producto no existe
+                    
                     Swal.fire({
                         icon: 'error',
                         title: 'Producto no encontrado',
@@ -42,7 +42,7 @@ function DetalleProductoCarrito() {
                     });
                 }
             } catch (error) {
-                // Mostrar error si hay un problema al cargar el producto
+               
                 Swal.fire({
                     icon: 'error',
                     title: 'Error al cargar el producto',
@@ -56,7 +56,7 @@ function DetalleProductoCarrito() {
         fetchProducto();
     }, [id]);
 
-    // Validar la cantidad no negativos o inferiores a 1
+  
     const handleQuantityChange = (e) => {
         const value = Number(e.target.value);
         if (value < 1) {
@@ -78,7 +78,7 @@ function DetalleProductoCarrito() {
         }
     };
 
-    // Función para agregar al carrito
+   
     const handleAddToCart = () => {
         if (quantity > stockRestante) {
             Swal.fire({
@@ -89,16 +89,16 @@ function DetalleProductoCarrito() {
             return;
         }
 
-        // Si la cantidad es válida, agregar al carrito
+      
         if (producto) {
             addItem(producto, quantity);
-            // Actualizar el stock restante después de agregar al carrito
+           
             const stockActualizado = stockRestante - quantity;
             setStockRestante(stockActualizado);
         }
     };
 
-    // Deshabilitar el botón si el stock es 0
+    
     const isButtonDisabled = stockRestante === 0;
 
     if (loading) {
@@ -108,7 +108,7 @@ function DetalleProductoCarrito() {
     return (
         <Container>
             <Row className="mt-1">
-                {/* Columna de la izquierda: Imagen grande */}
+                {/* izquierda: Imagen grande */}
                 <Col xs={12} md={6} className="d-flex justify-content-center align-items-center">
                     <img 
                         src={producto.imagen} 
@@ -117,16 +117,16 @@ function DetalleProductoCarrito() {
                     />
                 </Col>
                 
-                {/* Columna de la derecha: Detalles del producto */}
+                {/*  derecha: Detalles del producto */}
                 <Col xs={12} md={6} className="product-details"> 
                     <h2>{producto.nombre}</h2>
                     <p>{producto.descripcion}</p>
                     <p className="product-price">Precio: {producto.precio} US$</p>
 
-                    {/* Mostrar el stock inicial y el stock restante */}
+                  
                     <p className="product-stock">Stock disponible: {stockRestante}</p>
 
-                    {/* Control de cantidad minimo 1 maximo 10*/}
+                   
                     <div className="mb-3">
                         <label htmlFor="quantity" className="form-label">Cantidad</label>
                         <input
@@ -137,35 +137,34 @@ function DetalleProductoCarrito() {
                             onChange={handleQuantityChange}
                             max={stockRestante}
                             className="form-control"
-                            style={{ width: '60px' }} // Ajuste del input más chico
+                            style={{ width: '60px' }} 
                         />
                     </div>
 
-                    {/* Mostrar mensaje si el producto ya está en el carrito */}
+                   
                     {isInCart(producto.id) && (
                         <div className="alert alert-info" role="alert">
                             El producto ya se encuentra en el carrito
                         </div>
                     )}
 
-                    {/* Mostrar mensaje "temporalmente sin stock" si el stock es 0 */}
+                   
                     {stockRestante === 0 && (
                         <div className="alert alert-warning" role="alert">
                             Temporalmente sin stock
                         </div>
                     )}
 
-                    {/* Botón para agregar al carrito */}
+                    
                     <Button 
                         onClick={handleAddToCart}
                         variant="primary"
                         className="add-to-cart-button"  
-                        disabled={isButtonDisabled}  // Deshabilitar el botón si el stock es 0
+                        disabled={isButtonDisabled}  
                     >
                         {isInCart(producto.id) ? 'Agregar otra unidad' : 'Agregar al carrito'}
                     </Button>
 
-                    {/* Botón para volver al listado anterior */}
                     <Button 
                         variant="secondary" 
                         className="mt-3" 

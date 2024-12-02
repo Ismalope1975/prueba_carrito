@@ -7,7 +7,7 @@ import Nosotros from './components/nosotros/Nosotros.jsx';
 import Contacto from './components/Contacto.jsx';
 import Productos from './components/productos/productos.jsx';
 import ItemListContainer from './components/home/home.jsx';
-import Footer from './components/footer/Footer'; 
+import Footer from './components/footer/footer'; 
 import Rastreo from './components/rastreo.jsx';
 
 import { CartProvider } from './components/cartwidget/CartContext.jsx'; 

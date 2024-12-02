@@ -1,4 +1,4 @@
-import './NoPage.css'; // Asegúrate de importar los estilos CSS
+import './NoPage.css'; 
 
 import { Link } from "react-router-dom"
 

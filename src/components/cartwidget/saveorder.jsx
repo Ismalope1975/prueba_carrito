@@ -4,9 +4,9 @@ import Swal from 'sweetalert2';
 
 const saveOrder = async (customerData, cartItems, installments, cardData) => {
   try {
-    // Preparar la información para guardar en Firebase
+    // armar toda la info a guardar
     const orderData = {
-      date: new Date(),  // Usamos el formato estándar de JavaScript Date
+      date: new Date(),  
       customer: {
         name: customerData.name,
         document: customerData.document,
@@ -21,21 +21,21 @@ const saveOrder = async (customerData, cartItems, installments, cardData) => {
         unitPrice: item.unitPrice,
         subtotal: item.subtotal,
       })),
-      total: cartItems.reduce((total, item) => total + item.subtotal, 0),  // Total de la compra
+      total: cartItems.reduce((total, item) => total + item.subtotal, 0),  
       payment: {
-        status: 'yes',  // pago fue confirmado
+        status: 'yes',  
                
       },
-      pending: false,  // El pago está confirmado
+      pending: false,  
     };
 
-    // Guardar la orden en Firestore
+    // Guardar la orden
     const ordersCollection = collection(db, 'orders');
 
-    // agregar el documento a la colección de Firebase
+    
     const docRef = await addDoc(ordersCollection, orderData);
     
-    // Mostrar mensaje de éxito
+    
     Swal.fire({
       icon: 'success',
       title: '¡Pago confirmado!',

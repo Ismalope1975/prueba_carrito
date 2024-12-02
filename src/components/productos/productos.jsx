@@ -6,16 +6,16 @@ import { db } from '/src/firebase/config.js';
 import Producto from "./producto"; 
 
 const Productos = () => {
-  const { categoria } = useParams();  // Obtener la categoría desde la URL
+  const { categoria } = useParams();  
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Hook 
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchProductos = async () => {
       setLoading(true);
-      setError(null); // Resetear error 
+      setError(null); 
 
       try {
         const productosRef = collection(db, "productos");
@@ -24,7 +24,7 @@ const Productos = () => {
         const productosFiltrados = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
         if (productosFiltrados.length === 0) {
-          // Si no hay productos para esa categoría,  NoPage
+       
           navigate('/nopage', { replace: true });
         } else {
           setProductosFiltrados(productosFiltrados);

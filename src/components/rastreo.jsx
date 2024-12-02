@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { db } from '/src/firebase/config';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { Button, Form, Alert, Spinner, Row, Col, Table } from 'react-bootstrap';
-import './Rastreo.css';  // Importa el archivo CSS con los estilos personalizados
+import './Rastreo.css'; 
 
 const Rastreo = () => {
-  const [searchValue, setSearchValue] = useState('');  // Estado para guardar el número de orden o documento ingresado
-  const [orderData, setOrderData] = useState(null);  // Estado para guardar la data del pedido
-  const [loading, setLoading] = useState(false);  // Estado para manejar el spinner de carga
-  const [error, setError] = useState('');  // Estado para manejar los errores
+  const [searchValue, setSearchValue] = useState('');  
+  const [orderData, setOrderData] = useState(null);  
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState('');  
 
   const handleSearchValueChange = (e) => {
-    setSearchValue(e.target.value);  // Actualiza el valor cuando cambia el input
+    setSearchValue(e.target.value);  
   };
 
   const handleSearchOrder = async () => {
@@ -21,11 +21,11 @@ const Rastreo = () => {
     }
 
     setLoading(true);
-    setError('');  // Limpiar errores previos
-    setOrderData(null);  // Limpiar los datos previos de la orden
+    setError(''); 
+    setOrderData(null);  
 
     try {
-      // Buscar primero por el número de orden (si es un número)
+     
       const orderQuery = query(
         collection(db, 'orders'),
         where('orderNumber', '==', searchValue)
@@ -34,12 +34,12 @@ const Rastreo = () => {
       const querySnapshot = await getDocs(orderQuery);
 
       if (!querySnapshot.empty) {
-        // Si se encuentra alguna orden con el número de orden
+       
         querySnapshot.forEach((doc) => {
           setOrderData(doc.data());
         });
       } else {
-        // Si no se encuentra por número de orden, buscar por documento del cliente
+       
         const documentQuery = query(
           collection(db, 'orders'),
           where('customer.document', '==', searchValue)
@@ -59,16 +59,16 @@ const Rastreo = () => {
       setError('Hubo un error al buscar la orden. Intente nuevamente.');
       console.error('Error al buscar la orden:', err);
     } finally {
-      setLoading(false);  // Detener el estado de carga
+      setLoading(false);  
     }
   };
 
   const calculateSubtotalWithoutIVA = (price, quantity) => {
-    return (price / 1.22) * quantity;  // Calculamos el subtotal sin IVA
+    return (price / 1.22) * quantity; 
   };
 
   const calculateIVA = (subtotalWithoutIVA) => {
-    return subtotalWithoutIVA * 0.22;  // Calculamos el IVA (22%)
+    return subtotalWithoutIVA * 0.22;  // IVA (22%)
   };
 
   const calculateTotal = () => {
@@ -86,8 +86,8 @@ const Rastreo = () => {
   };
 
   return (
-    <div className="container-fluid mt-2 custom-background"> {/* Aplicar clase personalizada */}
-      {/* Fila para el formulario de búsqueda */}
+    <div className="container-fluid mt-2 custom-background"> 
+   
       <Row className="mb-4">
         <Col className="d-flex justify-content-start">
           <Form.Control
@@ -95,7 +95,7 @@ const Rastreo = () => {
             placeholder="Número de orden o Documento s/guión"
             value={searchValue}
             onChange={handleSearchValueChange}
-            style={{ maxWidth: '320px' }} // Hacemos el input más pequeño
+            style={{ maxWidth: '320px' }} 
           />
           <Button
             variant="primary"
@@ -166,8 +166,8 @@ const Rastreo = () => {
                     <td>{item.productName}</td>
                     <td>{item.productCode}</td>
                     <td>{item.quantity}</td>
-                    <td>{(item.price / 1.22).toFixed(2)}</td> {/* Mostrar precio sin IVA */}
-                    <td>{(calculateSubtotalWithoutIVA(item.price, item.quantity)).toFixed(2)}</td> {/* Subtotal sin IVA */}
+                    <td>{(item.price / 1.22).toFixed(2)}</td> {/* precio sin IVA */}
+                    <td>{(calculateSubtotalWithoutIVA(item.price, item.quantity)).toFixed(2)}</td>
                   </tr>
                 ))}
               </tbody>

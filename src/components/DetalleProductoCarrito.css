@@ -1,32 +1,32 @@
-/* Estilos para la imagen */
+
 .product-image {
     max-width: 100%;
     max-height: 500px;
     object-fit: cover;
 }
 
-/* Estilos para la columna de detalles */
+
 .product-details {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 1.5rem;
-    color: #212529; /* Color oscuro */
+    color: #212529; 
 }
 
 
-/* Estilo de error */
+
 .error-message {
-    color: #dc3545; /* Rojo para errores */
+    color: #dc3545; 
 }
 
-/* Botón principal */
+
 .add-to-cart-button {
     width: 100%;
 }
 
-/* Estilo para el precio */
+
 .product-price {
-    color: #28a745; /* Verde para el precio */
-    font-size: 1.5rem; /* Tamaño de fuente más grande */
+    color: #28a745; 
+    font-size: 1.5rem; 
 }

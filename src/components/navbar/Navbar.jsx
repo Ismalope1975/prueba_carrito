@@ -37,8 +37,8 @@ function NavScrollExample() {
 
           <Outlet />
 
-          {/* Barra de búsqueda con margen a la derecha para crear más espacio para el carrito */}
-          <Form className="d-flex me-3"> {/* `me-3` agrega margen a la derecha */}
+          {/* Barra de búsqueda */}
+          <Form className="d-flex me-3"> 
             <Form.Control
               type="search"
               placeholder="Buscar"

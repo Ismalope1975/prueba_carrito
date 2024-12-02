@@ -7,7 +7,7 @@ import { db, addDoc, collection, doc, getDoc, updateDoc } from '/src/firebase/co
 import Swal from 'sweetalert2';
 
 function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa' }) {
-  const { cart, removeItem, clear, updateItemQuantity } = useCart();  // El contexto del carrito
+  const { cart, removeItem, clear, updateItemQuantity } = useCart();  
   const [customerData, setCustomerData] = useState({
     name: '',
     document: '',
@@ -17,8 +17,8 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
   });
   const [showCustomerModal, setShowCustomerModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [editingItem, setEditingItem] = useState(null);  // Para guardar el artículo que estamos editando
-  const [newQuantity, setNewQuantity] = useState(0);  // Para guardar la nueva cantidad
+  const [editingItem, setEditingItem] = useState(null); 
+  const [newQuantity, setNewQuantity] = useState(0); 
 
   const formatoPrecio = new Intl.NumberFormat('es-ES', {
     style: 'currency',
@@ -35,11 +35,11 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
 
   const handleContinuePurchase = () => {
     setShowCustomerModal(true);
-    handleClose(); // Cierra el modal actual del carrito
+    handleClose(); 
   };
 
   const handleConfirmPayment = async () => {
-    setLoading(true);  // Inicia el estado de carga
+    setLoading(true); 
   
     try {
       const totalCarrito = cart.reduce((total, item) => total + item.precio * item.quantity, 0);
@@ -60,10 +60,10 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
         status: 'pending',
       };
   
-      // Guardar el pedido en Firestore
+      // Guardar el pedido 
       const orderRef = await addDoc(collection(db, 'orders'), orderData);
   
-      // Actualizar el stock de los productos
+      
       for (const item of cart) {
         const productRef = doc(db, 'productos', item.id);
         const productSnapshot = await getDoc(productRef);
@@ -82,14 +82,14 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
         }
       }
   
-      // Mostrar mensaje de éxito con el número de orden
+      
       Swal.fire({
         icon: 'success',
         title: '¡Pago confirmado!',
         text: `Su pedido ha sido procesado con éxito. Su número de orden es: ${orderNumber}`,
       });
   
-      // Limpiar el carrito y cerrar el modal
+     
       clear();
       setShowCustomerModal(false);
       handleClose();
@@ -103,24 +103,23 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
       });
     }
   
-    // Desactivar el estado de carga después de finalizar el proceso (en try o catch)
+    // terminar la carga
     setLoading(false);
   };
   
   
-
-  // Función para manejar la edición de la cantidad
+  
   const handleEditQuantity = (item) => {
-    setEditingItem(item);  // Establecer el ítem a editar
-    setNewQuantity(item.quantity);  // Establecer la cantidad actual
+    setEditingItem(item); 
+    setNewQuantity(item.quantity);  
   };
 
-  // Función para guardar la nueva cantidad
+ 
   const handleSaveQuantity = () => {
     if (newQuantity > 0) {
-      // Actualizar la cantidad en el carrito usando la función del contexto
+     
       updateItemQuantity(editingItem.id, newQuantity);  
-      setEditingItem(null);  // Cerrar el modal de edición
+      setEditingItem(null); 
     } else {
       alert("La cantidad debe ser mayor que 0.");
     }
@@ -199,7 +198,7 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
         </Modal.Footer>
       </Modal>
 
-      {/* Modal para editar cantidad */}
+      {/* Modal para la cantidad */}
       <Modal show={editingItem !== null} onHide={() => setEditingItem(null)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Editar cantidad</Modal.Title>
@@ -229,7 +228,7 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
         </Modal.Footer>
       </Modal>
 
-      {/* Modal de factura */}
+      {/* Modal para la orden */}
       <InvoiceModal
         show={showCustomerModal}
         handleClose={() => setShowCustomerModal(false)}
@@ -240,7 +239,7 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
         handleConfirmPayment={handleConfirmPayment}
       />
 
-      {/* Spinner */}
+      {/* Spinner mientras guarda todo*/}
       {loading && (
         <div className="d-flex justify-content-center align-items-center fixed-top w-100 h-100 bg-white bg-opacity-50">
           <Spinner animation="border" variant="primary" />
