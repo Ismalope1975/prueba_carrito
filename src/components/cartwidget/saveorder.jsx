@@ -23,13 +23,8 @@ const saveOrder = async (customerData, cartItems, installments, cardData) => {
       })),
       total: cartItems.reduce((total, item) => total + item.subtotal, 0),  // Total de la compra
       payment: {
-        status: 'yes',  // Suponemos que el pago fue confirmado
-        installments: installments,
-        cardDetails: {
-          number: cardData.number,
-          expiry: cardData.expiry,
-          cvc: cardData.cvc,
-        },
+        status: 'yes',  // pago fue confirmado
+               
       },
       pending: false,  // El pago está confirmado
     };
@@ -37,11 +32,9 @@ const saveOrder = async (customerData, cartItems, installments, cardData) => {
     // Guardar la orden en Firestore
     const ordersCollection = collection(db, 'orders');
 
-    // Intentar agregar el documento a la colección de Firebase
+    // agregar el documento a la colección de Firebase
     const docRef = await addDoc(ordersCollection, orderData);
     
-    console.log("Document written with ID: ", docRef.id);  // Log para verificar si el documento se guardó
-
     // Mostrar mensaje de éxito
     Swal.fire({
       icon: 'success',

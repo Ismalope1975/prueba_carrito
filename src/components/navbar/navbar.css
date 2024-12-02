@@ -17,3 +17,15 @@
     color:black
    
   }
+ 
+.lightcolor  {
+  background-color: #cdd3da !important; 
+}
+
+.navbar-light .navbar-nav .nav-link {
+  font-size: 1.1rem; 
+}
+
+.navbar-light .navbar-nav .nav-dropdown .nav-dropdown-item {
+  font-size: 1.1rem; 
+}

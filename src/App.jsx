@@ -7,7 +7,8 @@ import Nosotros from './components/nosotros/Nosotros.jsx';
 import Contacto from './components/Contacto.jsx';
 import Productos from './components/productos/productos.jsx';
 import ItemListContainer from './components/home/home.jsx';
-import Footer from './components/footer/footer'; 
+import Footer from './components/footer/Footer'; 
+import Rastreo from './components/rastreo.jsx';
 
 import { CartProvider } from './components/cartwidget/CartContext.jsx'; 
 import DetalleProductoCarrito from './components/DetalleProductoCarrito.jsx';
@@ -24,8 +25,9 @@ function App() {
           <Route path="/sucursales" element={<Sucursales />} /> 
           <Route path="/contacto" element={<Contacto />} /> 
           <Route path="/nosotros" element={<Nosotros />} /> 
-          <Route path="/item/:id" element={<DetalleProductoCarrito />} />        
-         
+          <Route path="/item/:id" element={<DetalleProductoCarrito />} /> 
+          <Route path="/rastreo" element={<Rastreo />} />
+                          
           <Route path="*" element={<NoPage />} />
         </Routes>
         <Footer />

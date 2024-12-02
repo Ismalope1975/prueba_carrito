@@ -13,7 +13,7 @@ import './navbar.css';
 
 function NavScrollExample() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="lightcolor" expand="lg">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <Logo />
@@ -29,6 +29,7 @@ function NavScrollExample() {
               <NavDropdown.Item as={Link} to="category/accesorios">Accesorios</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="category/varios">Varios speakers y Monitores</NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link as={Link} to="/rastreo">Rastreo de Pedido</Nav.Link>
             <Nav.Link as={Link} to="/sucursales">Sucursales</Nav.Link>
             <Nav.Link as={Link} to="/nosotros">Sobre Nosotros</Nav.Link>
             <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>

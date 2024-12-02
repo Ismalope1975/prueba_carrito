@@ -39,9 +39,9 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
   };
 
   const handleConfirmPayment = async () => {
+    setLoading(true);  // Inicia el estado de carga
+  
     try {
-      setLoading(true);
-
       const totalCarrito = cart.reduce((total, item) => total + item.precio * item.quantity, 0);
       const orderNumber = `ORD-${Date.now()}`;
       
@@ -59,36 +59,41 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
         orderDate: new Date().toISOString(),
         status: 'pending',
       };
-
+  
+      // Guardar el pedido en Firestore
       const orderRef = await addDoc(collection(db, 'orders'), orderData);
-
+  
+      // Actualizar el stock de los productos
       for (const item of cart) {
         const productRef = doc(db, 'productos', item.id);
         const productSnapshot = await getDoc(productRef);
-
+  
         if (productSnapshot.exists()) {
           const productData = productSnapshot.data();
           const updatedStock = productData.stock - item.quantity;
-
+  
           if (updatedStock < 0) {
             throw new Error(`No hay suficiente stock para el producto: ${item.nombre}`);
           }
-
+  
           await updateDoc(productRef, { stock: updatedStock });
         } else {
           throw new Error(`El producto con ID ${item.id} no se encontró en la base de datos.`);
         }
       }
-
+  
+      // Mostrar mensaje de éxito con el número de orden
       Swal.fire({
         icon: 'success',
         title: '¡Pago confirmado!',
-        text: 'Su pedido ha sido procesado con éxito.',
+        text: `Su pedido ha sido procesado con éxito. Su número de orden es: ${orderNumber}`,
       });
-
+  
+      // Limpiar el carrito y cerrar el modal
       clear();
       setShowCustomerModal(false);
       handleClose();
+  
     } catch (error) {
       console.error('Error al guardar la orden o actualizar el stock:', error);
       Swal.fire({
@@ -96,10 +101,13 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
         title: 'Error',
         text: `Hubo un error al procesar su pedido: ${error.message}. Intente de nuevo más tarde.`,
       });
-    } finally {
-      setLoading(false);
     }
+  
+    // Desactivar el estado de carga después de finalizar el proceso (en try o catch)
+    setLoading(false);
   };
+  
+  
 
   // Función para manejar la edición de la cantidad
   const handleEditQuantity = (item) => {

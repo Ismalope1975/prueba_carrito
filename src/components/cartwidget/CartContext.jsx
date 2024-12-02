@@ -39,7 +39,7 @@ export const CartProvider = ({ children }) => {
         return cart.some(item => item.id === id);
     };
 
-    // Nueva función para actualizar la cantidad de un producto
+    // función para actualizar la cantidad de un producto
     const updateItemQuantity = (id, newQuantity) => {
         setCart(cart.map(item =>
             item.id === id
