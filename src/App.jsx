@@ -15,13 +15,14 @@ import DetalleProductoCarrito from './components/DetalleProductoCarrito.jsx';
 
 function App() {
   return (
-    <CartProvider> {/* Aquí envolvemos la aplicación con el CartProvider */}
+    <CartProvider> 
        
       <Router>
         <NavScrollExample />
         <Routes>
           <Route path="/" element={<ItemListContainer greeting="Bienvenido a nuestra tienda Virtual" />} />
           <Route path="category/:categoria" element={<Productos />} />
+          <Route path="/search" element={<Productos />} />
           <Route path="/sucursales" element={<Sucursales />} /> 
           <Route path="/contacto" element={<Contacto />} /> 
           <Route path="/nosotros" element={<Nosotros />} /> 

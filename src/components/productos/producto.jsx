@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'; 
-import "./styles.css";
+import "./producto.css";
 
 const Producto = ({ id, nombre, descripcion, precio, imagen }) => (
   <Card className="producto-card mb-4">

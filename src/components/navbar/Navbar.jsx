@@ -1,6 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import React, { useState } from 'react'; 
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from "../Logo/Logo";
 import CartWidget from "../cartwidget/CartWidget"; 
 import Button from 'react-bootstrap/Button';
@@ -12,6 +11,16 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import './navbar.css';
 
 function NavScrollExample() {
+  const [searchTerm, setSearchTerm] = useState(''); 
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+    }
+  };
+
   return (
     <Navbar className="lightcolor" expand="lg">
       <Container fluid>
@@ -35,20 +44,19 @@ function NavScrollExample() {
             <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
           </Nav>
 
-          <Outlet />
-
           {/* Barra de búsqueda */}
-          <Form className="d-flex me-3"> 
+          <Form className="d-flex me-3" onSubmit={handleSearch}> 
             <Form.Control
               type="search"
               placeholder="Buscar"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="me-2"
               aria-label="Search"
             />
             <Button variant="outline-success">Buscar</Button>
           </Form>
 
-          
           <CartWidget />
         </Navbar.Collapse>
       </Container>

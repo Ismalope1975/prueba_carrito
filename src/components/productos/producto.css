@@ -1,8 +1,36 @@
-.text-black {
-    color: black;
-  }
+#container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-image: url('/assets/fondo1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+    padding: 20px;
+    min-height: 100vh;
+}
 
-  #prodconteiner {
-    height: 100%; 
-  }
-  
+.card {
+    height: 460px !important;
+    width: 280px; 
+    background-color: rgb(189, 207, 209);
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid #a0c0eb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;  
+}
+
+.card img {
+    width: 100%;       
+    height: 200px;     
+    object-fit: cover; 
+}
+
+.titulo-blanco {
+    color: white;  
+}
