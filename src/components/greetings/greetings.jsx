@@ -1,5 +1,5 @@
 import React from 'react';
-import './Greetings.css';
+import '../greetings/greetings.css';
 
 function Greetings({ message }) {
   return (
