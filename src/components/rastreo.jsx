@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { db } from '/src/firebase/config';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { Button, Form, Alert, Spinner, Row, Col, Table } from 'react-bootstrap';
-import './Rastreo.css'; 
+import '../components/rastreo.css'; 
 
 const Rastreo = () => {
   const [searchValue, setSearchValue] = useState('');  
