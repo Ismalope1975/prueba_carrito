@@ -1,21 +1,22 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 
-// llamar variables de entorno
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, collection, getDoc, updateDoc, addDoc } from 'firebase/firestore';
+
+
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyCe7IBwbL8k_DMPfS6fGRWU3NZNbZHE8_E",
+  authDomain: "audiomaster-f1512.firebaseapp.com",
+  projectId: "audiomaster-f1512",
+  storageBucket: "audiomaster-f1512.firebasestorage.app",
+  messagingSenderId: "716088682819",
+  appId: "1:716088682819:web:6b8e323b6124cc785867f6",
+  measurementId: "G-XSW4KYJ6R7"
 };
 
-// Inicializar Firebase
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Inicializar Firestore
+
 const db = getFirestore(app);
 
 export { db, addDoc, collection, doc, getDoc, updateDoc };
