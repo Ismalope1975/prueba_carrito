@@ -1,6 +1,6 @@
 import React, { useState } from 'react'; 
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from "../Logo/Logo";
+import Logo from "../logo/Logo";
 import CartWidget from "../cartwidget/CartWidget"; 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
