@@ -54,7 +54,7 @@ function NavScrollExample() {
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">Buscar</Button>
+            <Button variant="outline-success" type='submit'>Buscar</Button>
           </Form>
 
           <CartWidget />

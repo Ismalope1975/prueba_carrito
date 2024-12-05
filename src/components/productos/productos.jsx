@@ -5,7 +5,7 @@ import { useProducts } from './useProducts';
 import './producto.css'; 
 
 const Productos = () => {
-  const { productos, loading, categoria, error } = useProducts();
+  const { productos, loading, categoria, error, searchTerm } = useProducts();
  
   
   if (loading) {
@@ -32,7 +32,8 @@ const Productos = () => {
   return (
     <div id="container">
       <h3 className="titulo-blanco">
-        {categoria ? `Productos en la categoría: ${categoria}` : `Resultados de la búsqueda`}
+      {categoria ? `Productos en la categoría: ${categoria}` : `Productos asociados con: ${searchTerm}`}
+
       </h3>
 
       {mensaje ? (

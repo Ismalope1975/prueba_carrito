@@ -9,6 +9,7 @@ export const useProducts = () => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [searchTerm, setsearchTerm] = useState(""); // estado para almacenar el término de búsqueda
 
   const normalizeString = (str) => {
     return str
@@ -20,6 +21,13 @@ export const useProducts = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const searchTerm = searchParams.get('q');  
+    
+    // Guardamos el término de búsqueda en el estado
+    if (searchTerm) {
+      setsearchTerm(searchTerm);
+    } else {
+      setsearchTerm("");
+    }
 
     const fetchProducts = async () => {
       setLoading(true);  
@@ -39,6 +47,7 @@ export const useProducts = () => {
           id: doc.id, ...doc.data()
         }));
 
+        // Filtramos los productos si hay un término de búsqueda
         if (searchTerm) {
           const normalizedSearchTerm = normalizeString(searchTerm);
           const filteredProducts = fetchedProducts.filter(producto => {
@@ -57,9 +66,9 @@ export const useProducts = () => {
     };
 
     fetchProducts();  
-  }, [location.search, categoria]);  
+  }, [location.search, categoria, searchTerm]);  // Añadimos searchTerm a las dependencias
 
-  return { productos, loading, error, categoria };  
+  return { productos, loading, error, categoria, searchTerm };  
 };
 
 export default useProducts;
