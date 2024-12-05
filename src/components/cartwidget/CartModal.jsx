@@ -57,7 +57,7 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
           subtotal: item.precio * item.quantity,
         })),
         orderDate: new Date().toISOString(),
-        status: 'pending',
+        status: 'pendiente',
       };
   
       // Guardar el pedido 
@@ -103,7 +103,7 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
       });
     }
   
-    // terminar la carga
+   
     setLoading(false);
   };
   
@@ -133,7 +133,7 @@ function CartModal({ show, handleClose, currency = 'USD', orderNumber = 'Previa'
           <Modal.Title className="w-100">
             <Row className="w-100">
               <Col xs={6} className="text-start">
-                <Image src="../public/img/designer.png" alt="Logo" fluid style={{ maxHeight: '130px' }} />
+                <Image src="/img/designer.png" alt="Logo" fluid style={{ maxHeight: '130px' }} />
               </Col>
               <Col xs={6} className="text-end">
                 <h4>Audiomaster</h4>

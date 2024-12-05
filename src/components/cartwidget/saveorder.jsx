@@ -12,6 +12,7 @@ const saveOrder = async (customerData, cartItems, installments, cardData) => {
         document: customerData.document,
         address: customerData.address,
         phone: customerData.phone,
+        mail: customerData.email,
         observations: customerData.observations,
       },
       cart: cartItems.map(item => ({

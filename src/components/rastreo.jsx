@@ -139,6 +139,7 @@ const Rastreo = () => {
                       <li>Nombre: {orderData.customer.name}</li>
                       <li>Documento: {orderData.customer.document}</li>
                       <li>Dirección: {orderData.customer.address}</li>
+                      <li>Email: {orderData.customer.email}</li>
                       <li>Teléfono: {orderData.customer.phone}</li>
                       <li>Observaciones: {orderData.customer.observations}</li>
                     </ul>

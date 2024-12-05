@@ -11,7 +11,7 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
     cvc: '',
   });
 
-  // vacio los campos cuando se abre 
+  // vaciar los campos cuando se abre el modal
   useEffect(() => {
     if (show) {
       setCustomerData({
@@ -19,6 +19,7 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
         document: '',
         address: '',
         phone: '',
+        email: '',  // Agregar campo de correo electrónico
         observations: '',
       });
       setCardData({
@@ -29,7 +30,7 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
     }
   }, [show, setCustomerData]);
 
-  // datos de la tarjeta
+  // manejar el cambio de datos de la tarjeta
   const handleCardChange = (e) => {
     const { name, value } = e.target;
     setCardData((prev) => ({
@@ -38,8 +39,9 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
     }));
   };
 
+  // Confirmar los datos del cliente
   const handleConfirmCustomerData = () => {
-    if (customerData.name && customerData.document && customerData.address && customerData.phone) {
+    if (customerData.name && customerData.document && customerData.address && customerData.phone && customerData.email) {
       handleConfirmData();
       handleConfirmPayment(); 
     } else {
@@ -47,9 +49,9 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
     }
   };
 
+  // Confirmar pago
   const handlePayment = () => {
     if (cardData.number && cardData.expiry && cardData.cvc) {
-     
       Swal.fire({
         icon: 'success',
         title: '¡Pago confirmado!',
@@ -109,6 +111,16 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
                     className="border-2 border-primary rounded"
                   />
                 </Form.Group>
+                <Form.Group controlId="email">
+                  <Form.Label>Correo Electrónico</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={customerData.email}
+                    onChange={(e) => setCustomerData({ ...customerData, email: e.target.value })}
+                    className="border-2 border-primary rounded"
+                    placeholder="ejemplo@correo.com"
+                  />
+                </Form.Group>
                 <Form.Group controlId="observations">
                   <Form.Label>Observaciones</Form.Label>
                   <Form.Control
@@ -122,10 +134,9 @@ function InvoiceModal({ show, handleClose, customerData, setCustomerData, handle
               </Form>
             </Col>
 
-            {/* a la derecha Pasarela de pago */}
+            {/* a la derecha: Pasarela de pago */}
             <Col md={6}>
               <Form>
-                
                 <Cards
                   cvc={cardData.cvc}
                   expiry={cardData.expiry}
